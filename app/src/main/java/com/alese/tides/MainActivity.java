@@ -18,18 +18,11 @@ public class MainActivity extends AppCompatActivity
 
     // declarations
     ArrayList<TideItem> tideItems;
-    ArrayList<HashMap<String, String>> tideListData;
 
-    public static final String DATE_LOW_1 = "DateLow1";
-    public static final String TIME_LOW_1 = "TimeLow1";
-    public static final String DATE_HIGH_1 = "DateHigh1";
-    public static final String TIME_HIGH_1 = "TimeHigh1";
-    public static final String DATE_LOW_2 = "DateLow2";
-    public static final String TIME_LOW_2 = "TimeLow2";
-    public static final String DATE_HIGH_2 = "DateHigh2";
-    public static final String TIME_HIGH_2 = "TimeHigh2";
-
-
+    public static final String DATE = "Date";
+    public static final String DAY = "Day";
+    public static final String HIGHLOW = "HighLow";
+    public static final String TIME = "Time";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,24 +44,16 @@ public class MainActivity extends AppCompatActivity
         {
             // Create each HashMap object, add data and put it in the tideItems List
             HashMap<String, String> map = new HashMap<>();
-            map.put(DATE_LOW_1, tideItem.getDate());
-            map.put(TIME_LOW_1, tideItem.getTime());
-            map.put(DATE_HIGH_1, tideItem.getDate());
-            map.put(TIME_HIGH_1, tideItem.getTime());
-            map.put(DATE_LOW_2, tideItem.getDate());
-            map.put(TIME_LOW_2, tideItem.getTime());
-            map.put(DATE_HIGH_2, tideItem.getDate());
-            map.put(TIME_HIGH_2, tideItem.getTime());
+            map.put(DATE + DAY, (tideItem.getDate() + tideItem.getDay()));
+            map.put(HIGHLOW + TIME, (tideItem.getHighlow() + tideItem.getTime()));
             tideListData.add(map);
         }
 
         // Create SimpleAdapter object
         SimpleAdapter adapter =
                 new SimpleAdapter(this, tideListData, R.layout.tides_list_layout,
-                        new String[]{DATE_LOW_1, TIME_LOW_1, DATE_HIGH_1, TIME_HIGH_1,
-                        DATE_LOW_2, TIME_LOW_2, DATE_HIGH_2, TIME_HIGH_2},
-                        new int[]{R.id.dateLow1, R.id.timeLow1, R.id.dateHigh1, R.id.timeHigh1,
-                        R.id.dateLow2, R.id.timeLow2, R.id.dateHigh2, R.id.timeHigh2});
+                        new String[]{DATE + DAY, HIGHLOW + TIME},
+                        new int[]{R.id.date, R.id.time});
 
         // Set up ListView in layout
         ListView mainListView = findViewById(R.id.mainListView);
@@ -80,6 +65,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
-        //Toast.makeText(this, "Row " + i + " was clicked", Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(this, "Tide Height: " + tideItems.get(i).getPredInCm() + " cm", Toast.LENGTH_SHORT).show();
     }
 }
