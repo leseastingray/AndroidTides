@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity
     public static final String DAY = "Day";
     public static final String HIGHLOW = "HighLow";
     public static final String TIME = "Time";
+    public static final String DAY_FORMAT = " ";
+    public static final String TIME_FORMAT = ": ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +46,22 @@ public class MainActivity extends AppCompatActivity
         {
             // Create each HashMap object, add data and put it in the tideItems List
             HashMap<String, String> map = new HashMap<>();
-            map.put(DATE + DAY, (tideItem.getDate() + tideItem.getDay()));
-            map.put(HIGHLOW + TIME, (tideItem.getHighlow() + tideItem.getTime()));
+            map.put(DATE + DAY_FORMAT + DAY, (tideItem.getDate() + DAY_FORMAT + tideItem.getDay()));
+            map.put(HIGHLOW + TIME_FORMAT + TIME, (tideItem.getHighlow() + TIME_FORMAT + tideItem.getTime()));
             tideListData.add(map);
         }
 
         // Create SimpleAdapter object
         SimpleAdapter adapter =
                 new SimpleAdapter(this, tideListData, R.layout.tides_list_layout,
-                        new String[]{DATE + DAY, HIGHLOW + TIME},
+                        new String[]{DATE + DAY_FORMAT + DAY, HIGHLOW + TIME_FORMAT + TIME},
                         new int[]{R.id.date, R.id.time});
 
         // Set up ListView in layout
         ListView mainListView = findViewById(R.id.mainListView);
         mainListView.setAdapter(adapter);
         mainListView.setOnItemClickListener(this);
+        mainListView.setFastScrollEnabled(true);
     }
 
     // TODO: Make toast to display tide height in cm
