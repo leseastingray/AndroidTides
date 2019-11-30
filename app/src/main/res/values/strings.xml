@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Tides</string>
 
+    <string name="location_label">Pick a location:</string>
+    <string name="location_astoria">Astoria</string>
+    <string name="location_florence">Florence</string>
+    <string name="location_south_beach">South Beach</string>
+
+    <string name="show_tides_button">Show Tides</string>
+
 </resources>

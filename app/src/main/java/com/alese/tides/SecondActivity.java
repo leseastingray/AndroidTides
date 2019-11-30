@@ -2,18 +2,18 @@ package com.alese.tides;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.alese.tides.FirstActivity;
 
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity
+public class SecondActivity extends AppCompatActivity
         implements AdapterView.OnItemClickListener {
 
     // declarations
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_second);
 
 
         // Create Dal (Data access layer) for parsing
@@ -58,13 +58,12 @@ public class MainActivity extends AppCompatActivity
                         new int[]{R.id.date, R.id.time});
 
         // Set up ListView in layout
-        ListView mainListView = findViewById(R.id.mainListView);
-        mainListView.setAdapter(adapter);
-        mainListView.setOnItemClickListener(this);
-        mainListView.setFastScrollEnabled(true);
+        ListView tideListView = findViewById(R.id.tidesListView);
+        tideListView.setAdapter(adapter);
+        tideListView.setOnItemClickListener(this);
+        tideListView.setFastScrollEnabled(true);
     }
 
-    // TODO: Make toast to display tide height in cm
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
