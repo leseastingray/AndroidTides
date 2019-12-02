@@ -3,23 +3,33 @@ package com.alese.tides;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
-public class FirstActivity extends AppCompatActivity {
+
+public class FirstActivity extends AppCompatActivity
+        implements TextView.OnEditorActionListener {
 
     // Widget Variables
     RadioButton astoriaLocation;
     RadioButton florenceLocation;
     RadioButton southBeachLocation;
+    EditText dateEditText;
     Button showTidesButton;
 
     // Other Variables
     public String tideLocation = "";
+    public String tideDate = "";
 
     // Fields
     public static final String TIDE_LOCATION = "tideLocation";
@@ -35,6 +45,7 @@ public class FirstActivity extends AppCompatActivity {
         astoriaLocation = (RadioButton) findViewById(R.id.astoriaRadioButton);
         florenceLocation = (RadioButton) findViewById(R.id.florenceRadioButton);
         southBeachLocation = (RadioButton) findViewById(R.id.southBeachRadioButton);
+        dateEditText = (EditText) findViewById(R.id.dateEditText);
         showTidesButton = (Button) findViewById(R.id.showTidesButton);
     }
 
@@ -57,6 +68,22 @@ public class FirstActivity extends AppCompatActivity {
     }
     // TODO: Need way to get date selection - EditText?
 
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent)
+    {
+        if(i == EditorInfo.IME_ACTION_DONE ||
+                i == EditorInfo.IME_ACTION_UNSPECIFIED ||
+                i == EditorInfo.IME_ACTION_NEXT ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+        {
+            tideDate = dateEditText.getText().toString();
+        }
+        // Hide the soft keyboard
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+        return false;
+    }
+
     // TODO: Finish Show Tides Button
     // Click handler for onShowTides, referenced in layout/activity_first.xml
     // Will incorporate user selections and move to the second activity for list result
@@ -66,7 +93,7 @@ public class FirstActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SecondActivity.class);
         // Put tideLocation and tideDate into intent
         intent.putExtra(TIDE_LOCATION, tideLocation);
-        //intent.putExtra(TIDE_DATE, tideDate);
+        intent.putExtra(TIDE_DATE, tideDate);
         // Start new activity with intent and data
         startActivityForResult(intent, REQUEST_1);
     }

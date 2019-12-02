@@ -6,6 +6,8 @@
     <string name="location_florence">Florence</string>
     <string name="location_south_beach">South Beach</string>
 
+    <string name="date_label">Pick a date:</string>
+
     <string name="show_tides_button">Show Tides</string>
 
 </resources>
