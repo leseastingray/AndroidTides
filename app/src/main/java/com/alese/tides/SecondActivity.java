@@ -2,7 +2,6 @@ package com.alese.tides;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.alese.tides.FirstActivity;
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +14,7 @@ import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
 //import java.util.HashMap;
-import java.util.List;
+
 
 public class SecondActivity extends AppCompatActivity
         implements AdapterView.OnItemClickListener {
@@ -38,8 +37,8 @@ public class SecondActivity extends AppCompatActivity
         setContentView(R.layout.activity_second);
 
         // Get intent from FirstActivity
-        String tideLocation = getIntent().getStringExtra(FirstActivity.TIDE_LOCATION);
-        String tideDate = getIntent().getStringExtra(FirstActivity.TIDE_DATE);
+        String tideLocation = getIntent().getStringExtra(FirstActivity.LOCATION);
+        String tideDate = getIntent().getStringExtra(FirstActivity.DATE);
 
         // Initialize database
         TideSQLiteHelper tideHelper = new TideSQLiteHelper(this);
@@ -58,11 +57,13 @@ public class SecondActivity extends AppCompatActivity
                 this,
                 R.layout.tides_list_layout,
                 cursor,
-                new String[]{TideSQLiteHelper.DATE, TideSQLiteHelper.DAY,
+                new String[]{
+                        TideSQLiteHelper.DATE, TideSQLiteHelper.DAY,
                         TideSQLiteHelper.TIME, TideSQLiteHelper.HIGHLOW
                 },
                 new int[]{
-                        R.id.tidesListView
+                        R.id.dateTextView, R.id.dayTextView,
+                        R.id.timeTextView, R.id.highLowTextView
                 },
                 0 );	// no flags
         // Set up ListView in layout

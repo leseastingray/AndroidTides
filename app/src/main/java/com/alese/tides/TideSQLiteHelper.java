@@ -3,7 +3,8 @@ package com.alese.tides;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-//import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
@@ -65,6 +66,7 @@ public class TideSQLiteHelper extends SQLiteOpenHelper
         // Astoria TideItems
         for (TideItem item : astoriaTideItems)
         {
+            cv.put(LOCATION, "Astoria");
             cv.put(DATE, item.getDate());
             cv.put(DAY, item.getDay());
             cv.put(TIME, item.getTime());
@@ -75,6 +77,7 @@ public class TideSQLiteHelper extends SQLiteOpenHelper
         // Florence TideItems
         for (TideItem item : florenceTideItems)
         {
+            cv.put(LOCATION, "Florence");
             cv.put(DATE, item.getDate());
             cv.put(DAY, item.getDay());
             cv.put(TIME, item.getTime());
@@ -85,6 +88,7 @@ public class TideSQLiteHelper extends SQLiteOpenHelper
         // South Beach TideItems
         for (TideItem item : southBeachTideItems)
         {
+            cv.put(LOCATION, "South Beach");
             cv.put(DATE, item.getDate());
             cv.put(DAY, item.getDay());
             cv.put(TIME, item.getTime());

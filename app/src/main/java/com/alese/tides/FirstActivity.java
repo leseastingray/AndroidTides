@@ -32,8 +32,8 @@ public class FirstActivity extends AppCompatActivity
     public String tideDate = "";
 
     // Fields
-    public static final String TIDE_LOCATION = "tideLocation";
-    public static final String TIDE_DATE = "tideDate";
+    public static final String LOCATION = "tideLocation";
+    public static final String DATE = "tideDate";
     public static final int REQUEST_1 = 1;
 
     @Override
@@ -66,7 +66,6 @@ public class FirstActivity extends AppCompatActivity
             tideLocation = "South Beach";
         }
     }
-    // TODO: Need way to get date selection - EditText?
 
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent)
@@ -84,7 +83,6 @@ public class FirstActivity extends AppCompatActivity
         return false;
     }
 
-    // TODO: Finish Show Tides Button
     // Click handler for onShowTides, referenced in layout/activity_first.xml
     // Will incorporate user selections and move to the second activity for list result
     public void onShowTidesButtonClick(View v)
@@ -92,8 +90,8 @@ public class FirstActivity extends AppCompatActivity
         // Create new intent
         Intent intent = new Intent(this, SecondActivity.class);
         // Put tideLocation and tideDate into intent
-        intent.putExtra(TIDE_LOCATION, tideLocation);
-        intent.putExtra(TIDE_DATE, tideDate);
+        intent.putExtra(LOCATION, tideLocation);
+        intent.putExtra(DATE, tideDate);
         // Start new activity with intent and data
         startActivityForResult(intent, REQUEST_1);
     }
