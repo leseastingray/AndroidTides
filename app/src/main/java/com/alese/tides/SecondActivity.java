@@ -2,6 +2,7 @@ package com.alese.tides;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.alese.tides.FirstActivity;
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,7 +47,7 @@ public class SecondActivity extends AppCompatActivity
 
         // Query database for data relevant to selected location and date
         String query = "SELECT * " +
-                " FROM " + TideSQLiteHelper.TIDEFORECAST
+                "FROM " + TideSQLiteHelper.TIDEFORECAST
                 + " WHERE " + TideSQLiteHelper.LOCATION + " = '" + tideLocation
                 + "' AND " + TideSQLiteHelper.DATE + " = '" + tideDate
                 +"';";

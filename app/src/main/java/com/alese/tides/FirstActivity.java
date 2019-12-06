@@ -15,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class FirstActivity extends AppCompatActivity
@@ -28,13 +29,12 @@ public class FirstActivity extends AppCompatActivity
     Button showTidesButton;
 
     // Other Variables
-    public String tideLocation = "";
-    public String tideDate = "";
+    public String tideLocation;
+    public String tideDate;
 
     // Fields
     public static final String LOCATION = "tideLocation";
     public static final String DATE = "tideDate";
-    public static final int REQUEST_1 = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class FirstActivity extends AppCompatActivity
         florenceLocation = (RadioButton) findViewById(R.id.florenceRadioButton);
         southBeachLocation = (RadioButton) findViewById(R.id.southBeachRadioButton);
         dateEditText = (EditText) findViewById(R.id.dateEditText);
+        dateEditText.setOnEditorActionListener(this);
         showTidesButton = (Button) findViewById(R.id.showTidesButton);
     }
 
@@ -65,17 +66,16 @@ public class FirstActivity extends AppCompatActivity
         {
             tideLocation = "South Beach";
         }
+        Toast.makeText(this, tideLocation, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent)
     {
         if(i == EditorInfo.IME_ACTION_DONE ||
-                i == EditorInfo.IME_ACTION_UNSPECIFIED ||
-                i == EditorInfo.IME_ACTION_NEXT ||
-                keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+                i == EditorInfo.IME_ACTION_UNSPECIFIED)
         {
-            tideDate = dateEditText.getText().toString();
+            dateEditText.setText("2019/01/01");
         }
         // Hide the soft keyboard
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -87,12 +87,20 @@ public class FirstActivity extends AppCompatActivity
     // Will incorporate user selections and move to the second activity for list result
     public void onShowTidesButtonClick(View v)
     {
+        // Get data from dateEditText
+        String draftTideDate = dateEditText.getText().toString();
+        String month = draftTideDate.substring(0,1);
+        String day = draftTideDate.substring(3,4);
+        String year = draftTideDate.substring(6,9);
+        tideDate = year + "/" + month + "/" + day;
+        Toast.makeText(this, tideDate, Toast.LENGTH_SHORT);
+
         // Create new intent
         Intent intent = new Intent(this, SecondActivity.class);
         // Put tideLocation and tideDate into intent
         intent.putExtra(LOCATION, tideLocation);
         intent.putExtra(DATE, tideDate);
         // Start new activity with intent and data
-        startActivityForResult(intent, REQUEST_1);
+        this.startActivity(intent);
     }
 }

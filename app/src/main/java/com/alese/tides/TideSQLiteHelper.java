@@ -38,12 +38,12 @@ public class TideSQLiteHelper extends SQLiteOpenHelper
     {
         db.execSQL("CREATE TABLE " + TIDEFORECAST
                 + "(_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LOCATION + "TEXT,"
-                + DATE + "TEXT,"
-                + DAY + "TEXT,"
-                + TIME + "TEXT,"
-                + HIGHLOW + "TEXT"
-                + ")");
+                + LOCATION + " TEXT,"
+                + DATE + " TEXT,"
+                + DAY + " TEXT,"
+                + TIME + " TEXT,"
+                + HIGHLOW + " TEXT"
+                + ");");
 
         // Get the tide data and put it in the new table
         loadDatabaseFromXmlFile(db);

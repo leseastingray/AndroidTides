@@ -27,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:onClick="onLocationSelect"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -38,18 +39,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:onClick="onLocationSelect"
             android:text="@string/location_astoria" />
 
         <RadioButton
             android:id="@+id/florenceRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onLocationSelect"
             android:text="@string/location_florence" />
 
         <RadioButton
             android:id="@+id/southBeachRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onLocationSelect"
             android:text="@string/location_south_beach" />
     </RadioGroup>
 
