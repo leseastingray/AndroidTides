@@ -66,16 +66,18 @@ public class FirstActivity extends AppCompatActivity
         {
             tideLocation = "South Beach";
         }
-        Toast.makeText(this, tideLocation, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, tideLocation, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent)
     {
         if(i == EditorInfo.IME_ACTION_DONE ||
-                i == EditorInfo.IME_ACTION_UNSPECIFIED)
+                i == EditorInfo.IME_ACTION_UNSPECIFIED ||
+                i == EditorInfo.IME_ACTION_NEXT ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)
         {
-            dateEditText.setText("2019/01/01");
+            showTidesButton.hasFocus();
         }
         // Hide the soft keyboard
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -89,11 +91,10 @@ public class FirstActivity extends AppCompatActivity
     {
         // Get data from dateEditText
         String draftTideDate = dateEditText.getText().toString();
-        String month = draftTideDate.substring(0,1);
-        String day = draftTideDate.substring(3,4);
-        String year = draftTideDate.substring(6,9);
+        String month = draftTideDate.substring(0,2);
+        String day = draftTideDate.substring(3,5);
+        String year = draftTideDate.substring(6,10);
         tideDate = year + "/" + month + "/" + day;
-        Toast.makeText(this, tideDate, Toast.LENGTH_SHORT);
 
         // Create new intent
         Intent intent = new Intent(this, SecondActivity.class);
@@ -101,6 +102,6 @@ public class FirstActivity extends AppCompatActivity
         intent.putExtra(LOCATION, tideLocation);
         intent.putExtra(DATE, tideDate);
         // Start new activity with intent and data
-        this.startActivity(intent);
+        startActivity(intent);
     }
 }

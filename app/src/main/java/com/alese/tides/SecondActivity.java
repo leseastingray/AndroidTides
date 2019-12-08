@@ -3,6 +3,7 @@ package com.alese.tides;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.alese.tides.FirstActivity;
+import android.content.Intent;
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,8 @@ public class SecondActivity extends AppCompatActivity
     // declarations
     ArrayList<TideItem> tideItems;
     ListView tideListView;
+    private TideItem tideItemClicked;
+    private String tidePrediction;
 
     public static final String DATE = "Date";
     public static final String DAY = "Day";
@@ -38,8 +41,9 @@ public class SecondActivity extends AppCompatActivity
         setContentView(R.layout.activity_second);
 
         // Get intent from FirstActivity
-        String tideLocation = getIntent().getStringExtra(FirstActivity.LOCATION);
-        String tideDate = getIntent().getStringExtra(FirstActivity.DATE);
+        Intent intent = getIntent();
+        String tideLocation = intent.getExtras().getString(FirstActivity.LOCATION);
+        String tideDate = intent.getExtras().getString(FirstActivity.DATE);
 
         // Initialize database
         TideSQLiteHelper tideHelper = new TideSQLiteHelper(this);
@@ -67,6 +71,7 @@ public class SecondActivity extends AppCompatActivity
                         R.id.timeTextView, R.id.highLowTextView
                 },
                 0 );	// no flags
+        
         // Set up ListView in layout
         tideListView = findViewById(R.id.tidesListView);
         tideListView.setAdapter(adapter);
@@ -77,6 +82,6 @@ public class SecondActivity extends AppCompatActivity
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
-        Toast.makeText(this, "Tide Height: " + tideItems.get(i).getPredInCm() + " cm", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Tide Height: " + tideItems.get(i).getPredInCm() + " cm", Toast.LENGTH_SHORT).show();
     }
 }

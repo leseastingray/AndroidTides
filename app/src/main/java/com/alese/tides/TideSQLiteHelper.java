@@ -70,7 +70,7 @@ public class TideSQLiteHelper extends SQLiteOpenHelper
             cv.put(DATE, item.getDate());
             cv.put(DAY, item.getDay());
             cv.put(TIME, item.getTime());
-            cv.put(HIGHLOW, item.getHighlow());
+            cv.put(HIGHLOW, item.getPredInCm() + " " + item.getHighlow());
 
             db.insert(TIDEFORECAST, null, cv);
         }
@@ -81,7 +81,7 @@ public class TideSQLiteHelper extends SQLiteOpenHelper
             cv.put(DATE, item.getDate());
             cv.put(DAY, item.getDay());
             cv.put(TIME, item.getTime());
-            cv.put(HIGHLOW, item.getHighlow());
+            cv.put(HIGHLOW, item.getPredInCm() + " " + item.getHighlow());
 
             db.insert(TIDEFORECAST, null, cv);
         }
@@ -92,7 +92,7 @@ public class TideSQLiteHelper extends SQLiteOpenHelper
             cv.put(DATE, item.getDate());
             cv.put(DAY, item.getDay());
             cv.put(TIME, item.getTime());
-            cv.put(HIGHLOW, item.getHighlow());
+            cv.put(HIGHLOW, item.getPredInCm() + " " + item.getHighlow());
 
             db.insert(TIDEFORECAST, null, cv);
         }
